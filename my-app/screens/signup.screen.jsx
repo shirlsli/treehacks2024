@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { Button } from 'tamagui';
 
 const Signup = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((json) => setPosts(json))
-      .catch((error) => console.error(error));
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>full name</Text>
-      <Text>email</Text>
-      <Text>password</Text>
-      <Text>confirm password</Text>
-      <Button
-        title="next"
-        onPress={() => navigation.navigate("Details")}
-        style={styles.button}
-      />
+      <View style={styles.labelContainer}>
+        <Text style={styles.label}>full name</Text>
+        <Text style={styles.label}>email</Text>
+        <Text style={styles.label}>password</Text>
+        <Text style={styles.label}>confirm password</Text>
+      </View>
+      <Button>next</Button>
     </View>
   );
 };
@@ -34,6 +27,17 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       height: '100%',
     },
+    labelContainer: {
+      alignItems: 'flex-start',
+    },
+    label: {
+      textAlign: 'left',
+      marginBottom: 5,
+        fontFamily: 'Sora',
+        fontWeight: 500,
+        fontSize: "20px",
+        color: "#FBF6F1"
+    },
     button: {
       backgroundColor: '#FBF6F1',
       padding: 10,
@@ -41,6 +45,14 @@ const styles = StyleSheet.create({
       margin: 10,
       width: 108,
       height: 41,
-      boxShadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      textAlign: "center",
+      fontFamily: "Inter"
     },
-  });
+    inputBox: {
+        width: "272px",
+        height: "29px",
+        background: "#FBF6F1",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        borderRadius: "7px"
+    }
+});

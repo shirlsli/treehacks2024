@@ -17,10 +17,10 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>full name</Text>
-      <Text>email</Text>
-      <Text>password</Text>
-      <Text>confirm password</Text>
+      <Text style={styles.label}>full name</Text>
+      <Text style={styles.label}>email</Text>
+      <Text style={styles.label}>password</Text>
+      <Text style={styles.label}>confirm password</Text>
       <Button
         title='next'
         onPress={() => navigation.navigate('Details')}
@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
   },
+  label: {
+    textAlign: 'left'
+  },
   button: {
     backgroundColor: '#FBF6F1',
     padding: 10,
@@ -52,6 +55,13 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 108,
     height: 41,
-    boxShadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   },
+  inputBox: {
+  width: "272px",
+  height: "29px",
+  background: "#FBF6F1",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  borderRadius: "7px"
+
+  }
 });
