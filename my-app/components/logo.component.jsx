@@ -9,7 +9,7 @@ import {
     Sora_700Bold,
 } from '@expo-google-fonts/sora';
 
-const Logo = () => {
+const Logo = ({ fontFamily, fontSize, imageSize, color }) => {
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
     Sora_500Medium,
@@ -17,12 +17,13 @@ const Logo = () => {
     Sora_700Bold,
   });
   const green_logo = require("../assets/leaves-green.svg");
+  const white_logo = require("../assets/leaves_icon_white.svg");
   
   return (
     <View style={styles.container}>
         <div style={styles.logo_div}>
-            <Text style={styles.logoName}>mendwell</Text>
-            <Image style={styles.logoImg} source={green_logo}/> 
+            <Text style={[styles.logoName, { fontSize: fontSize, fontFamily: fontFamily }]}>mendwell</Text>
+            <Image style={[styles.logoImg, { height: imageSize, width: imageSize }]} source={color ? green_logo : white_logo}/> 
         </div>
       
     </View>
@@ -38,15 +39,11 @@ const styles = StyleSheet.create({
     },
 
     logoName: {
-        fontFamily: 'Sora_500Medium',
-        fontSize: '32px',
         textAlign: 'center',
         color: '#556B2F'
     },
 
     logoImg: {
-        height: '30px',
-        width: '30px',
         marginLeft: '5px',
         marginTop: '3px'
     }

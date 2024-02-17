@@ -2,9 +2,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignupScreen from "./screens/signup.screen";
 import DetailsScreen from "./screens/details.screen";
-import '@tamagui/core/reset.css'
-import { TamaguiProvider } from 'tamagui'
-import tamaguiConfig from './tamagui.config'
+import '@tamagui/core/reset.css';
+import { TamaguiProvider } from 'tamagui';
+import tamaguiConfig from './tamagui.config';
+import WelcomeScreen from "./screens/welcome.screen";
 
 
 const Stack = createNativeStackNavigator();
@@ -13,19 +14,21 @@ export default function App() {
   return (
     <TamaguiProvider config={tamaguiConfig}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+        screenOptions={{
+          headerShown: false // Hide the navigation bar
+        }}>
           <Stack.Screen
             name="Signup"
             component={SignupScreen}
-            options={{ title: "Signup" }}
           />
           <Stack.Screen
-            name="Details"
-            component={DetailsScreen}
-            options={{ title: "Details" }}
+            name="Welcome"
+            component={WelcomeScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
     </TamaguiProvider>
   );
 }
+
