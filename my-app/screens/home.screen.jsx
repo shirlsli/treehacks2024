@@ -17,9 +17,12 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>full name</Text>
+      <Text>email</Text>
+      <Text>password</Text>
+      <Text>confirm password</Text>
       <Button
-        title='Go to Details'
+        title='next'
         onPress={() => navigation.navigate('Details')}
         style={styles.button}
       />
@@ -37,15 +40,18 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#B0C38F',
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
   },
   button: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#FBF6F1',
     padding: 10,
-    borderRadius: 15,
+    borderRadius: 7,
     margin: 10,
+    width: 108,
+    height: 41,
+    boxShadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   },
 });
