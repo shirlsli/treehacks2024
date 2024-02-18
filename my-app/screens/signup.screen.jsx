@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Text, Input } from "tamagui";
+import Logo from '../components/logo.component';
+import {
+    useFonts,
+    Sora_400Regular,
+    Sora_500Medium,
+    Sora_600SemiBold,
+    Sora_700Bold,
+} from '@expo-google-fonts/sora';
 
 const Signup = ({ navigation }) => {
+    let [fontsLoaded] = useFonts({
+        Sora_400Regular,
+        Sora_500Medium,
+        Sora_600SemiBold,
+        Sora_700Bold,
+    });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,22 +24,27 @@ const Signup = ({ navigation }) => {
   const [errorMessage, showErrorMessage] = useState(false);
 
   const handleSignup = () => {
-    const userData = {
+    let userData = {
       name: name,
       email: email,
       password: password,
-      confirmPassword: confirmPassword
+      confirmPassword: confirmPassword,
+      medication: []
     };
-    if (userData.password === userData.confirmPassword) {
-        // proceed with making new user
+    if (userData.password !== userData.confirmPassword) {
+        showErrorMessage(true);
     } else {
-
+        // create new user
+        // go to welcome screen
+        showErrorMessage(false);
+        navigation.navigate('Welcome', { userData: userData });
     }
     console.log(userData);
   };
 
   return (
     <View style={styles.container}>
+        <Logo fontFamily={"Sora_500Medium"} fontSize={32} imageSize={30} color={false} />
       <View style={styles.labelContainer}>
         <Text style={styles.label}>full name</Text>
         <Input
@@ -62,11 +81,11 @@ const Signup = ({ navigation }) => {
       </View>
       <Button
         style={styles.button}
-        onClick={handleSignup}
+        onPress={handleSignup}
       >
         <Text style={styles.buttonText}>next</Text>
       </Button>
-      
+      <Text style={styles.label} display={errorMessage ? "contents" : "none"}>please re-enter your password</Text>
     </View>
   );
 };
@@ -82,20 +101,20 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     alignItems: "flex-start",
+    marginTop: 20
   },
   label: {
-    textAlign: "left",
+    textalign: "left",
     marginBottom: 5,
     marginTop: 5,
-    fontFamily: "Sora",
-    fontWeight: 500,
-    fontSize: "20px",
+    fontFamily: "Sora_500Medium",
+    fontSize: "16px",
     color: "#FBF6F1",
   },
   buttonText: {
     fontFamily: "Sora",
-    fontWeight: 500,
-    fontSize: "20px",
+    fontFamily: "Sora_500Medium",
+    fontSize: "16px",
     color: "#556B2F",
   },
   button: {
@@ -105,14 +124,15 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 108,
     height: 41,
-    textAlign: "center",
+    textalign: "center",
     fontFamily: "Inter",
     marginTop: 20,
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   inputBox: {
     width: "272px",
     height: "29px",
-    background: "#FBF6F1",
+    backgroundColor: "#FBF6F1",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "7px",
     marginBottom: 20,
