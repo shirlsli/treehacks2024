@@ -24,11 +24,12 @@ const Signup = ({ navigation }) => {
   const [errorMessage, showErrorMessage] = useState(false);
 
   const handleSignup = () => {
-    const userData = {
+    let userData = {
       name: name,
       email: email,
       password: password,
-      confirmPassword: confirmPassword
+      confirmPassword: confirmPassword,
+      medication: []
     };
     if (userData.password !== userData.confirmPassword) {
         showErrorMessage(true);

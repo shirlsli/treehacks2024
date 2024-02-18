@@ -17,7 +17,7 @@ const HomeScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
   const [title, setTitle] = useState("Medication");
   const [desc, setDesc] = useState("");
-  const [flaggedIngr, setFlaggedIngr] = useState([]);
+  const [flaggedIngr, setFlaggedIngr] = useState(["grapefruit juice"]);
 
   useEffect(() => {
     // if warning, safe, etc. change title, change desc, add flagged ingr

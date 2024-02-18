@@ -13,8 +13,8 @@ import {
 const Welcome = ({ route, navigation }) => {
 
   const { userData } = route.params;
-  const [med, setMedication] = React.useState([]);
-
+  const [medication, setMedication] = useState(""); 
+  
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
     Sora_500Medium,
@@ -22,9 +22,16 @@ const Welcome = ({ route, navigation }) => {
     Sora_700Bold,
   });
 
+  const addMedication = () => {
+    userData.medication.push(medication);
+    setMedication(""); 
+  }
+
   const saveMedication = () => {
-    userData["medication"] = med;
-    navigation.navigate('Home', {userData: userData});
+    if (medication !== "") {
+      userData.medication.push(medication);
+    }
+    navigation.navigate('Home', { userData: userData });
   };
 
   return (
@@ -38,12 +45,13 @@ const Welcome = ({ route, navigation }) => {
       />
       <Text style={styles.questionLabel}>What medication are you taking?</Text>
       <Input
-          size="$3"
-          style={styles.inputBox}
-          borderWidth={2}
-          value={med}
-          onChangeText={(text) => setMedication(text)}
-        />
+        size="$3"
+        style={styles.inputBox}
+        borderWidth={2}
+        value={medication}
+        onChangeText={(text) => setMedication(text)}
+        onSubmitEditing={addMedication}
+      />
       <Button style={styles.button} onClick={saveMedication}>
         <Text style={styles.buttonText}>submit</Text>
       </Button>
@@ -60,37 +68,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
   },
-  labelContainer: {
-    alignItems: "flex-start",
+  label: {
+    textalign: "left",
+    marginBottom: 5,
+    marginTop: 5,
+    fontFamily: "Sora_400Regular",
+    fontSize: 48,
+    color: "#556B2F",
   },
   questionLabel: {
     textalign: "left",
     marginBottom: 5,
     marginTop: 30,
     fontFamily: "Sora_600SemiBold",
-    fontSize: "16px",
-    color: "#556B2F",
-  },
-  label: {
-    textalign: "left",
-    marginBottom: 5,
-    marginTop: 5,
-    fontFamily: "Sora_400Regular",
-    fontSize: "48px",
-    color: "#556B2F",
-  },
-  logoText: {
-    textalign: "left",
-    marginBottom: 5,
-    marginTop: 5,
-    fontFamily: "Sora_600SemiBold",
-    fontSize: "48px",
+    fontSize: 16,
     color: "#556B2F",
   },
   buttonText: {
-    fontFamily: "Sora",
     fontFamily: "Sora_500Medium",
-    fontSize: "16px",
+    fontSize: 16,
     color: "#FBF6F1",
   },
   button: {
@@ -101,16 +97,13 @@ const styles = StyleSheet.create({
     width: 108,
     height: 41,
     textalign: "center",
-    fontFamily: "Inter",
     marginTop: 10,
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   inputBox: {
-    width: "272px",
-    height: "29px",
+    width: 272,
+    height: 29,
     backgroundColor: "#FBF6F1",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    borderRadius: "7px",
+    borderRadius: 7,
     marginBottom: 20,
   },
 });
