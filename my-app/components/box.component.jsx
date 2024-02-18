@@ -24,16 +24,33 @@ const Box = ({ title, desc, userData, flaggedIngr }) => {
   const [input, setInput] = useState("");
   const [chipColor, setChipColor] = useState("#B0C38F");
   const [chipBorderColor, setChipBorderColor] = useState("#FFFDF9");
-  const [medicationDesc, setMedicationDesc] = useState(["Tylenol is used for fever"]);
+  const [medicationDesc, setMedicationDesc] = useState([]);
+  const [medications, setMedications] = useState([]);
+
+  const getDescriptionByName = (name) => {
+    console.log(medications);
+    const medication = medications.find((med) => med.name === name);
+    console.log(medication.description);
+    return medication.description;
+  };
 
   useEffect(() => {
+    const medicationsData = require('../database/food-drug-interaction.json');
+    setMedications(medicationsData);
+    let medsDesc = [];
+    userData.medication.map((med) => {
+      console.log(med);
+      medsDesc.push(getDescriptionByName(med));
+    })
+    setMedicationDesc(medsDesc);
     if (flaggedIngr.length > 0) {
       setChipColor("#FED2C0"); // red
       setChipBorderColor("#B3572F");
     } else {
       setChipBorderColor("#B0C38F"); // green
     }
-    console.log(userData);
+    // find the medication that this user has
+    console.log(medicationDesc);
   });
 
   return (
