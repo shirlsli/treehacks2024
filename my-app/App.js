@@ -7,6 +7,7 @@ import { TamaguiProvider } from 'tamagui';
 import tamaguiConfig from './tamagui.config';
 import WelcomeScreen from "./screens/welcome.screen";
 import HomeScreen from "./screens/home.screen";
+import CameraScreen from "./screens/camera.screen";
 
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,10 @@ export default function App() {
         screenOptions={{
           headerShown: false // Hide the navigation bar
         }}>
+          {/* <Stack.Screen
+            name="Camera"
+            component={CameraScreen}
+          /> */}
           <Stack.Screen
             name="Signup"
             component={SignupScreen}
