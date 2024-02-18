@@ -21,6 +21,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
+    "react-native-chip": "^3.1.0",
+    "react-native-paper": "^5.12.3",
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
     "tamagui": "^1.89.29",

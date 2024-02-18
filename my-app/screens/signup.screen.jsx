@@ -36,7 +36,7 @@ const Signup = ({ navigation }) => {
         // create new user
         // go to welcome screen
         showErrorMessage(false);
-        navigation.navigate('Welcome');
+        navigation.navigate('Welcome', { userData: userData });
     }
     console.log(userData);
   };
@@ -80,7 +80,7 @@ const Signup = ({ navigation }) => {
       </View>
       <Button
         style={styles.button}
-        onClick={handleSignup}
+        onPress={handleSignup}
       >
         <Text style={styles.buttonText}>next</Text>
       </Button>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   label: {
-    textAlign: "left",
+    textalign: "left",
     marginBottom: 5,
     marginTop: 5,
     fontFamily: "Sora_500Medium",
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 108,
     height: 41,
-    textAlign: "center",
+    textalign: "center",
     fontFamily: "Inter",
     marginTop: 20,
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   inputBox: {
     width: "272px",
     height: "29px",
-    background: "#FBF6F1",
+    backgroundColor: "#FBF6F1",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "7px",
     marginBottom: 20,

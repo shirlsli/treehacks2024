@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Text, Input } from "tamagui";
 import Logo from "../components/logo.component";
-import SearchBar from "../components/searchbar.component";
 import {
   useFonts,
   Sora_400Regular,
@@ -11,32 +10,21 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 
-const Welcome = ({ navigation, user }) => {
+const Welcome = ({ route, navigation }) => {
+
+  const { userData } = route.params;
+  const [med, setMedication] = React.useState([]);
+
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
     Sora_500Medium,
     Sora_600SemiBold,
     Sora_700Bold,
   });
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, showErrorMessage] = useState(false);
 
   const saveMedication = () => {
-    const userData = {
-      name: name,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-    if (userData.password !== userData.confirmPassword) {
-      showErrorMessage(true);
-    } else {
-      showErrorMessage(false);
-    }
-    console.log(userData);
+    userData["medication"] = med;
+    navigation.navigate('Home', {userData: userData});
   };
 
   return (
@@ -49,7 +37,13 @@ const Welcome = ({ navigation, user }) => {
         color={true}
       />
       <Text style={styles.questionLabel}>What medication are you taking?</Text>
-      <SearchBar user={user} />
+      <Input
+          size="$3"
+          style={styles.inputBox}
+          borderWidth={2}
+          value={med}
+          onChangeText={(text) => setMedication(text)}
+        />
       <Button style={styles.button} onClick={saveMedication}>
         <Text style={styles.buttonText}>submit</Text>
       </Button>
@@ -70,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   questionLabel: {
-    textAlign: "left",
+    textalign: "left",
     marginBottom: 5,
     marginTop: 30,
     fontFamily: "Sora_600SemiBold",
@@ -78,7 +72,7 @@ const styles = StyleSheet.create({
     color: "#556B2F",
   },
   label: {
-    textAlign: "left",
+    textalign: "left",
     marginBottom: 5,
     marginTop: 5,
     fontFamily: "Sora_400Regular",
@@ -86,7 +80,7 @@ const styles = StyleSheet.create({
     color: "#556B2F",
   },
   logoText: {
-    textAlign: "left",
+    textalign: "left",
     marginBottom: 5,
     marginTop: 5,
     fontFamily: "Sora_600SemiBold",
@@ -106,15 +100,15 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 108,
     height: 41,
-    textAlign: "center",
+    textalign: "center",
     fontFamily: "Inter",
-    marginTop: 20,
+    marginTop: 10,
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   },
   inputBox: {
     width: "272px",
     height: "29px",
-    background: "#FBF6F1",
+    backgroundColor: "#FBF6F1",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "7px",
     marginBottom: 20,

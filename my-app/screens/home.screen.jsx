@@ -1,15 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
+import { Button, Text, Input } from "tamagui";
+import Logo from "../components/logo.component";
+import {
+  useFonts,
+  Sora_400Regular,
+  Sora_500Medium,
+  Sora_600SemiBold,
+  Sora_700Bold,
+} from "@expo-google-fonts/sora";
+import Box from "../components/box.component";
 
-import Post from '../components/post.component';
-import Button from '../components/button.component';
+const HomeScreen = ({ route, navigation }) => {
 
-const HomeScreen = ({ navigation }) => {
+  const { userData } = route.params;
   const [posts, setPosts] = useState([]);
+  const [title, setTitle] = useState("Medication");
+  const [desc, setDesc] = useState("");
+  const [flaggedIngr, setFlaggedIngr] = useState([]);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    // if warning, safe, etc. change title, change desc, add flagged ingr
+
+    fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((json) => setPosts(json))
       .catch((error) => console.error(error));
@@ -17,21 +30,10 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>full name</Text>
-      <Text style={styles.label}>email</Text>
-      <Text style={styles.label}>password</Text>
-      <Text style={styles.label}>confirm password</Text>
-      <Button
-        title='next'
-        onPress={() => navigation.navigate('Details')}
-        style={styles.button}
-      />
-      <FlatList 
-        data={posts}
-        renderItem={({ item }) => <Post title={item.title} body={item.body} />}
-        keyExtractor={(item) => item.id.toString()}
-      />
-      <StatusBar style='auto' />
+      <Text style={styles.label}>Summary</Text>
+      <View style={styles.containerInner}>
+        <Box title={title} desc={desc} userData={userData} flaggedIngr={flaggedIngr} />
+      </View>
     </View>
   );
 };
@@ -40,16 +42,24 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#B0C38F',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
+    backgroundColor: "#FBF6F1",
+    height: "100%",
+  },
+  containerInner: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   label: {
-    textAlign: 'left'
+    textalign: "left",
+    color: "#556B2F",
+    fontFamily: "Sora_500Medium",
+    fontSize: "24px",
+    marginLeft: "30px",
+    marginTop: "50px",
+    marginBottom: "20px"
   },
   button: {
-    backgroundColor: '#FBF6F1',
+    backgroundColor: "#FBF6F1",
     padding: 10,
     borderRadius: 7,
     margin: 10,
@@ -57,11 +67,10 @@ const styles = StyleSheet.create({
     height: 41,
   },
   inputBox: {
-  width: "272px",
-  height: "29px",
-  background: "#FBF6F1",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-  borderRadius: "7px"
-
-  }
+    width: "272px",
+    height: "29px",
+    backgroundColor: "#FBF6F1",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "7px",
+  },
 });

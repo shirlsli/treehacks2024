@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     inputBox: {
         width: "272px",
         height: "29px",
-        background: "#FBF6F1",
+        backgroundColor: "#FBF6F1",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         borderRadius: "7px",
         marginBottom: 50,

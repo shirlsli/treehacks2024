@@ -6,6 +6,7 @@ import '@tamagui/core/reset.css';
 import { TamaguiProvider } from 'tamagui';
 import tamaguiConfig from './tamagui.config';
 import WelcomeScreen from "./screens/welcome.screen";
+import HomeScreen from "./screens/home.screen";
 
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,10 @@ export default function App() {
           <Stack.Screen
             name="Welcome"
             component={WelcomeScreen}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
