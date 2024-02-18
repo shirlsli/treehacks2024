@@ -6,13 +6,6 @@ import { Button, XGroup } from 'tamagui'
 import { LayoutDashboard } from '@tamagui/lucide-icons'
 import { Camera } from '@tamagui/lucide-icons'
 import { ClipboardList } from '@tamagui/lucide-icons'
-
-
-
-
-
-
-
 import {
     useFonts,
     Sora_400Regular,

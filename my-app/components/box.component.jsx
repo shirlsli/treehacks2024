@@ -25,11 +25,9 @@ const Box = ({ title, desc, userData, flaggedIngr }) => {
   const [chipColor, setChipColor] = useState("#B0C38F");
   const [chipBorderColor, setChipBorderColor] = useState("#FFFDF9");
   const [medicationDesc, setMedicationDesc] = useState([]);
-  const [medications, setMedications] = useState([]);
   const medicationsData = require('../database/food-drug-interaction.json');
 
   useEffect(() => {
-    setMedications(medicationsData);
     let medsDesc = [];
     userData.medication.map((med) => {
       console.log(med);
@@ -42,13 +40,10 @@ const Box = ({ title, desc, userData, flaggedIngr }) => {
     } else {
       setChipBorderColor("#B0C38F"); // green
     }
-    // find the medication that this user has
-    console.log(medicationDesc);
   });
 
   const getDescriptionByName = (name) => {
-    console.log(medications);
-    const medication = medications.find((med) => med.name === name);
+    const medication = medicationsData.find((med) => med.name === name);
     console.log(medication.description);
     return medication.description;
   };
