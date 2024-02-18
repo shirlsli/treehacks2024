@@ -20,7 +20,7 @@ const LaunchScreen = ({ navigation }) => {
   
   return (
     <View style={styles.container}>
-        <Logo />
+        <Logo fontFamily={'Sora_500Medium'} fontSize={32} imageSize={30} color={true}/>
     </View>
   );
 };
