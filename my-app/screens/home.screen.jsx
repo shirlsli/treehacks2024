@@ -10,6 +10,7 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import Box from "../components/box.component";
+import DashboardScreen from "./dashboard.screen";
 
 const HomeScreen = ({ route, navigation }) => {
 
@@ -17,7 +18,7 @@ const HomeScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
   const [title, setTitle] = useState("Medication");
   const [desc, setDesc] = useState("");
-  const [flaggedIngr, setFlaggedIngr] = useState(["grapefruit juice"]);
+  const [flaggedIngr, setFlaggedIngr] = useState([]);
 
   useEffect(() => {
     // if warning, safe, etc. change title, change desc, add flagged ingr
@@ -34,6 +35,7 @@ const HomeScreen = ({ route, navigation }) => {
       <View style={styles.containerInner}>
         <Box title={title} desc={desc} userData={userData} flaggedIngr={flaggedIngr} />
       </View>
+      <DashboardScreen />
     </View>
   );
 };

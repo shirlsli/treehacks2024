@@ -25,28 +25,35 @@ const Box = ({ title, desc, userData, flaggedIngr }) => {
   const [chipColor, setChipColor] = useState("#B0C38F");
   const [chipBorderColor, setChipBorderColor] = useState("#FFFDF9");
   const [medicationDesc, setMedicationDesc] = useState([]);
+  const [foodDesc, setFoodDesc] = useState([]);
   const medicationsData = require('../database/food-drug-interaction.json');
 
   useEffect(() => {
     let medsDesc = [];
+    let foodsDesc = [];
     userData.medication.map((med) => {
-      console.log(med);
       medsDesc.push(getDescriptionByName(med));
+      foodsDesc.push(getFoodDescriptionByName(med));
     })
     setMedicationDesc(medsDesc);
+    setFoodDesc(foodsDesc);
     if (flaggedIngr.length > 0) {
       setChipColor("#FED2C0"); // red
       setChipBorderColor("#B3572F");
     } else {
       setChipBorderColor("#B0C38F"); // green
     }
-  });
+  }, [userData]);
 
-  const getDescriptionByName = (name) => {
-    const medication = medicationsData.find((med) => med.name === name);
-    console.log(medication.description);
-    return medication.description;
-  };
+  function getDescriptionByName(name) {
+    const medication = medicationsData.medications.find(med => med.name === name);
+    return medication ? medication.description : "Description not found";
+  }
+
+  function getFoodDescriptionByName(name) {
+    const medication = medicationsData.medications.find(med => med.name === name);
+    return medication ? medication.food_interaction_summary : "Description not found";
+  }
 
   return (
     <View
@@ -68,7 +75,7 @@ const Box = ({ title, desc, userData, flaggedIngr }) => {
             >
               {med}
             </Chip>
-            <Text style={styles.descLabel}>
+            <Text style={[styles.descLabel, {marginBottom: (index == flaggedIngr.length - 1) ?  20 : 10}]}>
                 {medicationDesc[index]}
             </Text>
               </View>
@@ -84,15 +91,20 @@ const Box = ({ title, desc, userData, flaggedIngr }) => {
       </Text>
       {flaggedIngr.map((ingr, index) => {
         return (
+          <View>
           <Chip
             mode="flat"
-            style={[styles.chip, { backgroundColor: chipColor, marginBottom: (index == flaggedIngr.length - 1) ?  20 : 10 }]}
+            style={[styles.chip, { backgroundColor: chipColor }]}
             onPress={() => console.log("Pressed")}
             selectedColor={chipColor}
             textStyle={{ color: "#000000" }}
           >
             {ingr}
           </Chip>
+          <Text style={[styles.descLabel, {marginBottom: (index == flaggedIngr.length - 1) ?  20 : 10}]}>
+            {foodDesc[index]}
+          </Text>
+          </View>
         );
       })}
     </View>
@@ -129,9 +141,9 @@ const styles = StyleSheet.create({
   },
   descLabel: {
     textalign: "left",
-    marginBottom: 5,
     marginTop: 5,
     marginLeft: 20,
+    marginHorizontal: 5,
     fontFamily: "Sora_300Light",
     fontSize: "12px",
     color: "#000000",
