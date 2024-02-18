@@ -7,6 +7,7 @@ import { TamaguiProvider } from 'tamagui';
 import tamaguiConfig from './tamagui.config';
 import WelcomeScreen from "./screens/welcome.screen";
 import HomeScreen from "./screens/home.screen";
+import DashboardScreen from "./screens/dashboard.screen";
 import CameraScreen from "./screens/camera.screen";
 
 
@@ -35,6 +36,14 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
+          />
+          <Stack.Screen
+            name="DashboardScreen"
+            component={DashboardScreen}
+          />
+          <Stack.Screen
+            name="Camera"
+            component={CameraScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

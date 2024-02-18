@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Text, Input } from "tamagui";
-import DashboardScreen from "./dashboard.screen";
 import Logo from "../components/logo.component";
 import {
   useFonts,
@@ -32,7 +31,7 @@ const Welcome = ({ route, navigation }) => {
     if (medication !== "") {
       userData.medication.push(medication);
     }
-    navigation.navigate('Dashboard', { userData: userData });
+    navigation.navigate('Home', { userData: userData });
   };
 
   return (
